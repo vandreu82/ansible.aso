@@ -1,9 +1,0 @@
----
-- name: actualizacion de paquetes deb
-  hosts: all
-  become: yes
-  tasks:
-    - name: update y upgrade
-      apt:
-        update_cache: yes
-        upgrade: dist
