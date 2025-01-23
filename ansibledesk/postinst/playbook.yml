@@ -1,7 +1,7 @@
 ---
 - name: Postinstalación de escritorio Linux
   hosts: all
-  become: yes
+  become: true
   roles:
     - firewall
     - basiccom
@@ -9,3 +9,9 @@
     - basicdev
     - codec
     - guiapps
+
+    - msfonts
+    - chrome
+    - spotify
+    - pycharm
+    - code

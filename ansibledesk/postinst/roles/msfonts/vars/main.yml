@@ -1,0 +1,4 @@
+---
+# vars file for msfonts
+msfont_dest:
+  /usr/share/fonts/truetype/windows

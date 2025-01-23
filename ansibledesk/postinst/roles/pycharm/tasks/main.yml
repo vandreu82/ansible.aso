@@ -1,0 +1,13 @@
+---
+# tasks file for pycharm
+- name: Instalar PyCharm usando Snap
+  block:
+      - name: Asegurarse de que Snap está instalado
+        ansible.builtin.apt:
+          name: snapd
+          state: present
+
+      - name: Instalar PyCharm Professional
+        community.general.snap:
+          name: pycharm-professional
+          classic: true

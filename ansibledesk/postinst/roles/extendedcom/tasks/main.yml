@@ -1,6 +1,6 @@
 ---
 # tasks file for extendedcom
-- name: Instalar paquetes extendidos
-  apt:
+- name: Instalar comandos extendidos
+  ansible.builtin.apt:
     name: "{{ extended_packages }}"
     state: present

@@ -1,0 +1,29 @@
+---
+# tasks file for msfonts
+
+- name: Crear directorio de fuentes en el sistema
+  ansible.builtin.file:
+    path: "{{ msfont_dest }}"
+    state: directory
+    owner: root
+    group: root
+    mode: "0755"
+
+- name: Copiar Fuentes TrueType
+  ansible.builtin.unarchive:
+    src: files/Fonts.zip
+    dest: "{{ msfont_dest }}"
+    owner: root
+    group: root
+    mode: "0644"
+    remote_src: false
+
+- name: Responder a la pregunta de EULA de ttf-mscorefonts-installer package
+  ansible.builtin.shell: /bin/echo "ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula boolean true" | /usr/bin/debconf-set-selections
+
+- name: Install ttf-mscorefonts-installer
+  ansible.builtin.apt:
+    name: ttf-mscorefonts-installer
+    state: present
+
+

@@ -1,0 +1,25 @@
+---
+# tasks file for roles/spotify
+- name: Instalar Spotify desde el repositorio oficial
+  block:
+    - name: APT key
+      ansible.builtin.get_url:
+        url: "{{ gpg_key_url }}"
+        dest: /etc/apt/trusted.gpg.d/{{ repo }}.asc
+
+    - name: Dearmor key
+      ansible.builtin.shell: cat /etc/apt/trusted.gpg.d/{{ repo }}.asc | gpg --dearmor --yes -o "/etc/apt/trusted.gpg.d/{{ repo }}.gpg"
+
+    - name: Añadir repositorio de Spotify
+      ansible.builtin.copy:
+        dest: /etc/apt/sources.list.d/{{repo}}.list
+        content: "{{ repo_url }}"
+
+    - name: Actualizar fuentes
+      ansible.builtin.apt:
+        update_cache: true
+
+    - name: Instalar Spotify Client
+      ansible.builtin.apt:
+        name: "{{ pkg_name }}"
+        state: present

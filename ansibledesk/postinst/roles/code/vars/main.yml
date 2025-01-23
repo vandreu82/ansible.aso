@@ -1,0 +1,7 @@
+---
+# vars file for roles/code
+repo: code
+gpg_key_url: https://packages.microsoft.com/keys/microsoft.asc
+key: microsoft
+repo_url: deb [signed-by=/etc/apt/trusted.gpg.d/microsoft.gpg] https://packages.microsoft.com/repos/vscode stable main
+pkg_name: code

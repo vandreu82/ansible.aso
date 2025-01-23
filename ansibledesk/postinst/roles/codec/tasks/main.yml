@@ -1,6 +1,6 @@
 ---
 # tasks file for codec
-- name: Instalar codec
-  apt:
+- name: Instalar codecs
+  ansible.builtin.apt:
     name: "{{ codec_packages + vaapi_packages + player_packages }}"
     state: present
