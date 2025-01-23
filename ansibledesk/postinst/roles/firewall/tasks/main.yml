@@ -1,0 +1,16 @@
+---
+# tasks file for firewall
+- name: Instalar UFW
+  apt:
+    name: ufw
+    state: present
+
+- name: Permitir solo tráfico SSH (puerto 22)
+  ufw:
+    rule: allow
+    port: 22
+    proto: tcp
+
+- name: Habilitar UFW
+  ufw:
+    state: enabled

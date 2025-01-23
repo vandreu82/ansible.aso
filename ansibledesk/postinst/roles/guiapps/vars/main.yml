@@ -1,0 +1,37 @@
+---
+# vars file for guiapps
+guiapps_packages:
+  - firefox
+  - libreoffice
+  - libreoffice-help-es
+  - libreoffice-l10n-es
+  - thunderbird
+  - kate
+  - xournal
+  - xournalpp
+  - calibre
+  - gimp
+  - audacity
+  - inkscape
+  - shutter
+  - filezilla
+  - geany
+  - cups-pdf
+  - pdfarranger
+  - geeqie
+  - keepassxc
+  - zeal
+  - sqlitebrowser
+  - wireshark
+  - meld
+  - qrencode
+  - gnome-disk-utility
+  - remmina
+  - krdc
+  - imagemagick
+  - kchmviewer
+  - guake
+  - solaar
+  - ckb-next
+  - gimagereader-qt5
+  - handbrake

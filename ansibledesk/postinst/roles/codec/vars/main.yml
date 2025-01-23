@@ -1,0 +1,15 @@
+---
+# vars file for codec
+codec_packages:
+  - gstreamer1.0-plugins-bad
+  - gstreamer1.0-plugins-bad-apps
+  - gstreamer1.0-plugins-ugly
+  - gstreamer1.0-libav
+  - libopenh264-7
+vaapi_packages:
+  - vainfo
+  - gstreamer1.0-vaapi
+player_packages:
+  - vlc
+  - mplayer
+  - ffmpeg

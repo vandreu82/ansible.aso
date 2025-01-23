@@ -1,0 +1,6 @@
+---
+# tasks file for guiapps
+- name: Instalar aplicaciones de interfaz gráfica
+  apt:
+    name: "{{ guiapps_packages }}"
+    state: present

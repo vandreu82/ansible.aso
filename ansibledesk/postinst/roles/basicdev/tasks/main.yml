@@ -1,0 +1,6 @@
+---
+# tasks file for basicdev
+- name: Instalar paquetes básicos de desarrollo
+  apt:
+    name: "{{ basicdev_packages }}"
+    state: present

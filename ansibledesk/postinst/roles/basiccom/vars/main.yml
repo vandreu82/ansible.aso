@@ -1,0 +1,8 @@
+---
+# vars file for basiccom
+basic_packages:
+  - vim
+  - tmux
+  - git
+  - rsync
+  - curl

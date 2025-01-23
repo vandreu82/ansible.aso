@@ -1,0 +1,6 @@
+---
+# tasks file for extendedcom
+- name: Instalar paquetes extendidos
+  apt:
+    name: "{{ extended_packages }}"
+    state: present

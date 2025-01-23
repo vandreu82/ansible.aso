@@ -1,0 +1,11 @@
+---
+- name: Postinstalación de escritorio Linux
+  hosts: all
+  become: yes
+  roles:
+    - firewall
+    - basiccom
+    - extendedcom
+    - basicdev
+    - codec
+    - guiapps

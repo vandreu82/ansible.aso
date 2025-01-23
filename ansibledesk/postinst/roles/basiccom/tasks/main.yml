@@ -1,0 +1,6 @@
+---
+# tasks file for basiccom
+- name: Instalar herramientas básicas
+  apt:
+    name: "{{ basic_packages }}"
+    state: present

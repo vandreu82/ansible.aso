@@ -1,0 +1,5 @@
+---
+# vars file for basicdev
+basicdev_packages:
+  - build-essential
+  - "linux-headers-{{ ansible_kernel }}"

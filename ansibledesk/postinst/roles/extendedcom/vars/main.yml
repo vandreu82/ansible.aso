@@ -1,0 +1,34 @@
+---
+# vars file for extendedcom
+
+extended_packages:
+  - p7zip
+  - p7zip-full
+  - unrar
+  - p7zip-rar
+  - openjdk-21-jdk
+  - ncftp
+  - hplip
+  - hplip-gui
+  - nmap
+  - ncdu
+  - kpartx
+  - ethtool
+  - sshfs
+  - lshw
+  - pwgen
+  - ldap-utils
+  - arp-scan
+  - iperf
+  - httpie
+  - powertop
+  - jq
+  - sysstat
+  - htop
+  - iotop
+  - ipcalc
+  - tree
+  - fsarchiver
+  - exfatprogs
+  - python3-venv
+  - ipython3
