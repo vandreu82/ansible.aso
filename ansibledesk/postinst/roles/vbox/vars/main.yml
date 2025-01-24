@@ -1,0 +1,6 @@
+---
+# vars file for vbox
+repo: vbox
+gpg_key_url: https://www.virtualbox.org/download/oracle_vbox_2016.asc
+repo_url: deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/vbox.gpg] https://download.virtualbox.org/virtualbox/debian noble contrib
+pkg_name: virtualbox-7.1

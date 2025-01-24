@@ -1,5 +1,6 @@
 ---
 # tasks file for chrome
 - name: Instalar Chrome desde el paquete oficial del APT
+  tags: [ deb, apt, repo, browser, gui, chrome ]
   ansible.builtin.apt:
     deb: https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb

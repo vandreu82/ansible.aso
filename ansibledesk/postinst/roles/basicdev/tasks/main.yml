@@ -1,6 +1,7 @@
 ---
 # tasks file for basicdev
 - name: Instalar paquetes básicos de desarrollo
+  tags: [ apt, basic, console, dev ]
   ansible.builtin.apt:
     name: "{{ basicdev_packages }}"
     state: present

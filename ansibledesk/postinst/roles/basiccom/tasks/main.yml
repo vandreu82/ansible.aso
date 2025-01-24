@@ -1,6 +1,7 @@
 ---
 # tasks file for basiccom
 - name: Instalar herramientas básicas
+  tags: [ apt, console, basic ]
   ansible.builtin.apt:
     name: "{{ basic_packages }}"
     state: present

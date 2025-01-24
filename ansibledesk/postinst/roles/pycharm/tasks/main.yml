@@ -1,6 +1,7 @@
 ---
 # tasks file for pycharm
 - name: Instalar PyCharm usando Snap
+  tags: [ snap, dev, python ]
   block:
       - name: Asegurarse de que Snap está instalado
         ansible.builtin.apt:

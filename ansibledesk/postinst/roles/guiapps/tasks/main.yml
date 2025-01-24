@@ -1,6 +1,7 @@
 ---
 # tasks file for guiapps
 - name: Instalar aplicaciones de interfaz gráfica
+  tags: [ apt, gui ]
   ansible.builtin.apt:
     name: "{{ guiapps_packages }}"
     state: present
