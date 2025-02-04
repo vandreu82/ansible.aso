@@ -1,0 +1,61 @@
+---
+# tasks file for docker
+- name: Eliminar paquetes conflictivos
+  tags: [ apt, remove ]
+  apt:
+    name: 
+      - docker.io
+      - docker-doc
+      - docker-compose
+      - docker-compose-v2
+      - podman-docker
+      - containerd
+      - runc
+    state: absent
+    purge: yes
+
+- name: Instalar "{{ repo }}" desde el repositorio oficial
+  tags: [ docker, apt, repo, cont ]
+  block:
+    - name: APT key
+      tags: [ apt, key, repo ]
+      ansible.builtin.get_url:
+        url: "{{ gpg_key_url }}"
+        dest: /etc/apt/trusted.gpg.d/{{ repo }}.asc
+
+    - name: Dearmor key
+      tags: [ apt, key, repo ]
+      ansible.builtin.shell: cat /etc/apt/trusted.gpg.d/{{ repo }}.asc | gpg --dearmor --yes -o "/etc/apt/trusted.gpg.d/{{ repo }}.gpg"
+
+    - name: Añadir repositorio de {{ repo }}
+      tags: [ apt, key, repo ]
+      ansible.builtin.copy:
+        dest: /etc/apt/sources.list.d/{{ repo }}.list
+        content: "{{ repo_url }}"
+
+    - name: Actualizar fuentes
+      ansible.builtin.apt:
+        update_cache: true
+
+    - name: Instalar docker
+      tags: [ apt, docker ]
+      apt:
+        name:
+          - docker-ce
+        state: present
+
+- name: Añadir a todos los usuarios que tengan un home al grupo vboxusers   # me ha ayudao un poco chatgpt
+  tags: [ users, groups ]
+  block:
+    # ya se que esto no es muy secure, pero no se me ha ocurrido otra forma de hacerlo portable
+    - name: Obtener un listado de usuarios
+      ansible.builtin.shell: "ls /home"   # solo usuarios que tienen /home
+      register: home_users                # lo almacenamos en una variable
+      changed_when: false                 # como solo lee, no hace cambios
+
+    - name: Añadir usuarios al grupo vboxusers
+      ansible.builtin.user:
+        name: "{{ item }}"                  # para cada item de la lista
+        groups: docker
+        append: yes                         # append para añadir al grupo sin borrar los demás
+      loop: "{{ home_users.stdout_lines }}" # recorremos la lista de usuarios con .stdout_lines

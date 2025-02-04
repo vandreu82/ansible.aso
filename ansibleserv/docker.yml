@@ -1,0 +1,6 @@
+---
+- name: Instalación de Wordpress
+  hosts: all
+  become: true
+  roles:
+    - docker

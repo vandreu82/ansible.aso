@@ -1,0 +1,5 @@
+---
+# vars file for docker
+repo: docker
+gpg_key_url: https://download.docker.com/linux/ubuntu/gpg
+repo_url: deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/docker.asc] https://download.docker.com/linux/ubuntu noble stable
