@@ -1,6 +1,6 @@
 ---
-# tasks file for roles/spotify
-- name: Instalar Spotify desde el repositorio oficial+
+# tasks file for roles/vbox
+- name: Instalar "{{ repo }}" desde el repositorio oficial
   tags: [ vbox, apt, repo, virt ]
   block:
     - name: APT key
@@ -24,3 +24,31 @@
       ansible.builtin.apt:
         name: "{{ pkg_name }}"
         state: present
+    
+- name: Instalar extension pack
+  tags: [ vbox, virt, ext_pack ]
+  block:
+    - name: Descargar VirtualBox extension pack
+      ansible.builtin.get_url:
+        url: "{{ last_ext_pack }}"
+        dest: /tmp/{{ pack_filename }}
+    
+    - name: Instalar VirtualBox extension pack
+      ansible.builtin.shell:
+        yes | VBoxManage extpack install /tmp/{{ pack_filename }}
+
+- name: Añadir a todos los usuarios que tengan un home al grupo vboxusers   # me ha ayudao un poco chatgpt
+  tags: [ users, groups ]
+  block:
+    # ya se que esto no es muy secure, pero no se me ha ocurrido otra forma de hacerlo portable
+    - name: Obtener un listado de usuarios
+      ansible.builtin.shell: "ls /home"   # solo usuarios que tienen /home
+      register: home_users                # lo almacenamos en una variable
+      changed_when: false                 # como solo lee, no hace cambios
+
+    - name: Añadir usuarios al grupo vboxusers
+      ansible.builtin.user:
+        name: "{{ item }}"                  # para cada item de la lista
+        groups: vboxusers
+        append: yes                         # append para añadir al grupo sin borrar los demás
+      loop: "{{ home_users.stdout_lines }}" # recorremos la lista de usuarios con .stdout_lines

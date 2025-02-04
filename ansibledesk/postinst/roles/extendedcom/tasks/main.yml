@@ -4,4 +4,5 @@
   tags: [ apt, command, extended ]
   ansible.builtin.apt:
     name: "{{ extended_packages }}"
+    update_cache: true
     state: present

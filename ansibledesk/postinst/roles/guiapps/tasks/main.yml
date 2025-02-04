@@ -4,4 +4,5 @@
   tags: [ apt, gui ]
   ansible.builtin.apt:
     name: "{{ guiapps_packages }}"
+    update_cache: true
     state: present

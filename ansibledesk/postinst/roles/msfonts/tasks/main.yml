@@ -26,6 +26,7 @@
   - name: Install ttf-mscorefonts-installer
     ansible.builtin.apt:
       name: ttf-mscorefonts-installer
+      update_cache: true
       state: present
 
 
