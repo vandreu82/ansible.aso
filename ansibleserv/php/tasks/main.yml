@@ -1,0 +1,21 @@
+---
+# tasks file for php
+- name: Instalar php y php-mysql
+  tags: [ apt, php ]
+  apt:
+    name:
+      - php
+      - php-mysql
+    state: present
+
+- name: Crear archivo info.php para verificar instalación de PHP
+  tags: [ php, test ]
+  copy:
+    dest: /var/www/html/info.php
+    content: |
+      <?php
+      phpinfo();
+      ?>
+    owner: www-data
+    group: www-data
+    mode: "0644"

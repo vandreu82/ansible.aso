@@ -1,0 +1,10 @@
+---
+- name: Instalación de Wordpress
+  hosts: all
+  become: true
+  roles:
+    - common
+    - apache
+    - mariadb
+    - php
+    - wordpress

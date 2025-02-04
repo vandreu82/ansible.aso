@@ -1,0 +1,7 @@
+---
+# tasks file for apache
+- name: Instalar Apache
+  tags: [ apache, apt ]
+  apt:
+    name: apache2
+    state: present

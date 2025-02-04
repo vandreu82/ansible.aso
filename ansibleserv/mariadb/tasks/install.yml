@@ -1,0 +1,22 @@
+---
+# tasks file for mariadb
+- name: Instalar MariaDB
+  tags: [ mariadb, apt ]
+  apt:
+    name:
+      - mariadb-server
+      - mariadb-client
+    state: present
+
+- name: Iniciar y habilitar MariaDB
+  tags: [ mariadb, restart ]
+  systemd:
+    name: mysql
+    enabled: yes
+    state: started
+
+- name: "Instalar ansible python3 mysql"
+  tags: [ mariadb, python ]
+  apt:
+    name: python3-pymysql
+    state: latest

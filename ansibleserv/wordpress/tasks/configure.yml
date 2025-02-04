@@ -1,0 +1,18 @@
+---
+- name: Crear directorio 'uploads' en wp-content
+  tags: [ wordpress, config, dirs ]
+  file:
+    path: /var/www/html/wordpress/wp-content/uploads
+    state: directory
+    owner: www-data
+    group: www-data
+    mode: "0755"
+
+- name: Configurar wp-config.php
+  tags: [ wordpress, config ]
+  template:
+    src: wp-config.php
+    dest: /var/www/html/wordpress/wp-config.php
+    owner: www-data
+    group: www-data
+    mode: '0644'

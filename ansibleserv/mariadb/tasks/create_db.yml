@@ -1,0 +1,27 @@
+---
+- name: Crear base de datos de WordPress
+  tags: [ mariadb, create ]
+  mysql_db:
+    login_user: root
+    login_password: "{{ mysql_root_password }}"
+    name: wordpress
+    state: present
+
+- name: Crear usuario de WordPress
+  tags: [ mariadb, create ]
+  mysql_user:
+    login_user: root
+    login_password: "{{ mysql_root_password }}"
+    name: wp_user
+    password: "wp_password"
+    priv: "wordpress.*:ALL"
+    host: localhost
+    state: present
+    column_case_sensitive: false
+
+- name: Recargar privilegios de MySQL
+  tags: [ mariadb, create ]
+  mysql_query:
+    login_user: root
+    login_password: "{{ mysql_root_password }}"
+    query: "FLUSH PRIVILEGES;"

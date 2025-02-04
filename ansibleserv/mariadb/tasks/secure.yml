@@ -1,0 +1,48 @@
+---
+- name: Establecer contraseña de root en MySQL
+  tags: [ mariadb, secure ]
+  mysql_user:
+    login_user: root
+    login_password: "{{ mysql_root_password }}"
+    name: root
+    password: "{{ mysql_root_password }}"
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+    host_all: yes
+    state: present
+    column_case_sensitive: false
+
+- name: Eliminar usuarios anónimos
+  tags: [ mariadb, secure ]
+  mysql_user:
+    login_user: root
+    login_password: "{{ mysql_root_password }}"
+    name: ""
+    host_all: yes
+    state: absent
+    column_case_sensitive: false
+
+- name: Deshabilitar acceso remoto de root
+  tags: [ mariadb, secure ]
+  mysql_user:
+    login_user: root
+    login_password: "{{ mysql_root_password }}"
+    name: root
+    host: "%"
+    state: absent
+    column_case_sensitive: false
+
+- name: Eliminar base de datos de prueba
+  tags: [ mariadb, secure ]
+  mysql_db:
+    login_user: root
+    login_password: "{{ mysql_root_password }}"
+    name: test
+    state: absent
+    
+
+- name: Recargar privilegios de MySQL
+  tags: [ mariadb, secure ]
+  mysql_query:
+    login_user: root
+    login_password: "{{ mysql_root_password }}"
+    query: "FLUSH PRIVILEGES;"
