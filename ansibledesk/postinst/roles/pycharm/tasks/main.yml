@@ -8,7 +8,7 @@
           name: snapd
           state: present
 
-      - name: Instalar PyCharm Professional
+      - name: Instalar PyCharm
         community.general.snap:
-          name: pycharm-professional
+          name: pycharm-community
           classic: true
