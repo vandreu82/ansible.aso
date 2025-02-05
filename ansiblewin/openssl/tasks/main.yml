@@ -1,0 +1,7 @@
+---
+# tasks file for openssl
+- name: Instalar OpenSSL
+  tags: [ choco, lib ]
+  win_chocolatey:
+    name: openssl
+    state: present

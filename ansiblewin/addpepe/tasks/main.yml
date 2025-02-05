@@ -1,0 +1,8 @@
+---
+# tasks file for addpepe
+- name: Crear usuario "pepe" si no existe
+  tags: [ user, pepe ]
+  win_user:
+    name: pepe
+    state: present
+    groups: Usuarios

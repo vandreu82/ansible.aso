@@ -1,0 +1,29 @@
+---
+# tasks file for vscode
+- name: Verificar si VS Code está instalado en el Registro (Sistema)
+  tags: [ vscode, check ]
+  win_shell: |
+    if (Get-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Microsoft Visual Studio Code" -ErrorAction SilentlyContinue) {
+      Write-Output "installed"
+    }
+  register: vscode_installed_system
+
+- name: Verificar si VS Code está instalado en el Registro (Usuario)
+  tags: [ vscode, check ]
+  win_shell: |
+    if (Get-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Microsoft Visual Studio Code" -ErrorAction SilentlyContinue) {
+      Write-Output "installed"
+    }
+  register: vscode_installed_user
+
+- name: Definir variable si VS Code está instalado por el Registro
+  tags: [ vscode, check ]
+  set_fact:
+    vscode_installed_by_registry: "{{ 'installed' in vscode_installed_system.stdout or 'installed' in vscode_installed_user.stdout }}"
+
+- name: Instalar VS Code si no está instalado por ningún método
+  tags: [ vscode, choco ]
+  win_chocolatey:
+    name: vscode
+    state: present
+  when: not vscode_installed_by_registry

@@ -1,0 +1,2 @@
+[all]
+ansiblewin ansible_user=usuario ansible_shell_type=powershell

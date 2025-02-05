@@ -1,0 +1,7 @@
+---
+# tasks file for notepad++
+- name: Instalar Notepad++
+  tags: [ choco, note++ ]
+  win_chocolatey:
+    name: notepadplusplus
+    state: present

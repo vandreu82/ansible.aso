@@ -1,0 +1,8 @@
+---
+- name: Configuraciones varias
+  hosts: all
+  roles:
+    - openssl
+    - addpepe
+    - vscode
+    - notepad++
